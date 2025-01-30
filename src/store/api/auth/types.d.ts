@@ -18,5 +18,7 @@ namespace AUTH {
 	};
 	type PostSignInResponse = {
 		token: string;
+		status: number;
+		message: string;
 	};
 }

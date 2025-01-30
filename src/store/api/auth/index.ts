@@ -25,4 +25,4 @@ const api = index.injectEndpoints({
 	}),
 });
 
-export const { usePostSignUpMutation } = api;
+export const { usePostSignUpMutation, usePostSignInMutation } = api;

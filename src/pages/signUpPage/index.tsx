@@ -10,6 +10,7 @@ import CustomInput from "@/components/ui/input-component";
 import { Button, Input } from "antd";
 import { usePostSignUpMutation } from "@/store/api/auth";
 import { showToast } from "@/components/ui/toastify";
+import Link from "next/link";
 
 const SignUpPage = () => {
 	const [postSignUp, { isLoading }] = usePostSignUpMutation();
@@ -33,6 +34,7 @@ const SignUpPage = () => {
 					router.push("/signIn");
 				}, 1500);
 			}
+			reset();
 		} catch (error) {
 			const err = error as TypesAuthorizationError;
 			console.error(error);
@@ -127,6 +129,7 @@ const SignUpPage = () => {
 								<button className={scss.button} type="submit">
 									{isLoading ? "Loading..." : "Зарегистрироваться"}
 								</button>
+								<Link className={scss.link} href={'/signIn'}>Login</Link>
 							</div>
 						</div>
 					</form>
