@@ -8,8 +8,11 @@ import Image from "next/image";
 import { urlPhoneAuth1, urlPhoneAuth2 } from "./constant";
 import CustomInput from "@/components/ui/input-component";
 import { Button, Input } from "antd";
+import { usePostSignUpMutation } from "@/store/api/auth";
+import { showToast } from "@/components/ui/toastify";
 
 const SignUpPage = () => {
+	const [postSignUp, { isLoading }] = usePostSignUpMutation();
 	const router = useRouter();
 
 	const {
@@ -22,6 +25,20 @@ const SignUpPage = () => {
 	});
 	const onSubmit: SubmitHandler<AuthTypes> = async (data, event) => {
 		event?.preventDefault();
+		try {
+			const res = await postSignUp(data).unwrap();
+			if (res.status === 201 || res.email) {
+				setTimeout(() => {
+					showToast("success", res.message || "success");
+					router.push("/signIn");
+				}, 1500);
+			}
+		} catch (error) {
+			const err = error as TypesAuthorizationError;
+			console.error(error);
+			const errorMessage = err?.data?.message || "Произошла ошибка";
+			showToast("error", errorMessage);
+		}
 	};
 	return (
 		<section className={scss.signUp_container}>
@@ -59,21 +76,10 @@ const SignUpPage = () => {
 											{...field}
 											type="text"
 											error={errors.name?.message}
+											success={fieldState.isTouched && !fieldState.invalid}
 										/>
 									)}
 								/>
-								{/* <Controller
-									name="name"
-									control={control}
-									rules={{ required: "Введите имя" }}
-									render={({ field, fieldState }) => (
-										<Input
-										id="name"
-											{...field}
-											status={fieldState.error ? "error" : ""}
-										/>
-									)}
-								/> */}
 								<Controller
 									name="email"
 									control={control}
@@ -85,13 +91,14 @@ const SignUpPage = () => {
 											message: "Введите действительный e-mail адрес",
 										},
 									}}
-									render={({ field }) => (
+									render={({ field, fieldState }) => (
 										<CustomInput
 											placeholder="Введите e-mail"
 											id="email"
 											{...field}
 											type="text"
 											error={errors.email?.message}
+											success={fieldState.isTouched && !fieldState.invalid}
 										/>
 									)}
 								/>
@@ -106,17 +113,20 @@ const SignUpPage = () => {
 											message: "Пароль должен содержать не менее 3 символов",
 										},
 									}}
-									render={({ field }) => (
+									render={({ field, fieldState }) => (
 										<CustomInput
 											placeholder="Пароль"
 											id="password"
 											{...field}
 											type="password"
 											error={errors.password?.message}
+											success={fieldState.isTouched && !fieldState.invalid}
 										/>
 									)}
 								/>
-								<Button type="submit">Зарегистрироваться</Button>
+								<button className={scss.button} type="submit">
+									{isLoading ? "Loading..." : "Зарегистрироваться"}
+								</button>
 							</div>
 						</div>
 					</form>

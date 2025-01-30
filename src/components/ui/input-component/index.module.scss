@@ -13,7 +13,7 @@
 	}
 
 	&.error .inputField {
-		border: 1px solid red;
+		border: 1px solid red !important;
 	}
 
 	&.error .inputLabel {
@@ -41,10 +41,10 @@
 }
 
 .inputField {
-	width: 100%;
-	padding: 8px;
-	font-size: 14px;
-	border-radius: 4px;
+	width: 100% !important;
+	padding: 8px !important;
+	font-size: 14px !important;
+	border-radius: 4px !important;
 }
 
 .errorMessage {

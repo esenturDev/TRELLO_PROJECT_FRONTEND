@@ -13,6 +13,7 @@ type CustomInputProps = {
 	label?: string;
 	success?: boolean;
 	disabled?: boolean;
+	onBlur?: React.FocusEventHandler<HTMLInputElement>
 	onChange?: (value: string) => void;
 	id?: string;
 };
@@ -23,15 +24,17 @@ const CustomInput = ({
 	label,
 	success = false,
 	disabled = false,
+	onBlur,
 	onChange,
 	placeholder = "",
-	id
+	id,
 }: CustomInputProps) => {
 	const [isFocused, setIsFocused] = useState<boolean>(false);
-	console.log();
 	
+	console.log(error);
+
 	const handleFocus = () => setIsFocused(true);
-	const handleBlur = () => setIsFocused(false);
+	// const handleBlur = () => setIsFocused(false);
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		if (onChange) {
@@ -40,38 +43,39 @@ const CustomInput = ({
 	};
 
 	const containerClassName = `${scss.inputContainer} ${
-		error
-			? scss.error
-			: success
-			? scss.success
-			: isFocused
-			? scss.focused
-			: scss.default
-	}`;
+    error
+        ? scss.error
+        : success
+        ? scss.success
+        : isFocused
+        ? scss.focused
+        : scss.default
+}`;
+
 	return (
 		<div className={containerClassName}>
 			{label && <label className={scss.inputLabel}>{label}</label>}
 			{type === "password" ? (
 				<Password
-				id={id}
+					id={id}
 					value={value}
 					placeholder={placeholder}
 					disabled={disabled}
 					onFocus={handleFocus}
-					onBlur={handleBlur}
+					onBlur={onBlur}
 					onChange={handleChange}
-					className={scss.inputField}
+					className={`${scss.inputField} ${error ? scss.error : ''}`}
 				/>
 			) : (
 				<Input
-				id={id}
+					id={id}
 					value={value}
 					placeholder={placeholder}
 					disabled={disabled}
 					onFocus={handleFocus}
-					onBlur={handleBlur}
+					onBlur={onBlur}
 					onChange={handleChange}
-					className={scss.inputField}
+					className={`${scss.inputField} ${error ? scss.error : ''}`}
 				/>
 			)}
 			{error && <div className={scss.errorMessage}>{error}</div>}
