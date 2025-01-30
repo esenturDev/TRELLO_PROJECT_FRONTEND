@@ -1,0 +1,62 @@
+.inputContainer {
+	margin-bottom: 16px;
+	position: relative;
+
+	&.default .inputField {
+		border: 1px solid #d9d9d9;
+		background-color: #fff;
+	}
+
+	&.focused .inputField {
+		border: 1px solid #1890ff;
+		box-shadow: 0 0 4px rgba(24, 144, 255, 0.5);
+	}
+
+	&.error .inputField {
+		border: 1px solid red;
+	}
+
+	&.error .inputLabel {
+		color: red;
+	}
+
+	&.success .inputField {
+		border: 1px solid #52c41a;
+	}
+}
+
+.inputLabel {
+	display: block;
+	margin-bottom: 4px;
+	font-size: 14px;
+	color: #595959;
+
+	.inputContainer.error & {
+		color: red;
+	}
+
+	.inputContainer.success & {
+		color: #52c41a;
+	}
+}
+
+.inputField {
+	width: 100%;
+	padding: 8px;
+	font-size: 14px;
+	border-radius: 4px;
+}
+
+.errorMessage {
+	color: red;
+	font-size: 12px;
+	margin-top: 4px;
+}
+
+.successIcon {
+	position: absolute;
+	right: 10px;
+	top: 35px;
+	font-size: 16px;
+	color: #52c41a;
+}

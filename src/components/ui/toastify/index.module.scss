@@ -1,0 +1,36 @@
+.toastContainer {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border-radius: .5rem;
+  font-size: .875rem;
+  position: relative;
+}
+
+.success {
+  background-color: #e5faea;
+  color: #00cd4a;
+  border: 1px solid #00cd4a;
+}
+
+.error {
+  background-color: #fff0f0;
+  color: #f96767;
+  border: 1px solid #f96767;
+}
+
+.default {
+  background-color: #1f2937;
+  color: white;
+}
+
+.closeButton {
+  position: absolute;
+  top: .75rem;
+  right: 1rem;
+  font-size: 1.25rem;
+  color: #1f2937;
+  background: none;
+  border: none;
+  cursor: pointer;
+}

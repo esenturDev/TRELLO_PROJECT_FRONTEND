@@ -1,0 +1,38 @@
+.customTextareaContainer {
+	margin-bottom: 16px;
+
+	&.default .customTextarea {
+		border: 1px solid #d9d9d9;
+	}
+
+	&.focused .costomTextarea {
+		border: 1px solid #1890ff;
+		box-shadow: 0 0 4px rgba(24, 144, 255, 0.5);
+	}
+
+	&.error .customTextarea {
+		border: 1px solid red;
+	}
+}
+
+.customTextareaLabel {
+	display: flex;
+	margin-bottom: 4px;
+	font-size: 14px;
+	color: #595959;
+	.customTextareaContainer .error & {
+		color: red;
+	}
+}
+
+.customTextarea {
+	width: 100%;
+	padding: 8px;
+	font-size: 14px;
+}
+
+.errorMessage {
+	color: red;
+	font-size: 12px;
+	margin-top: 4px;
+}
