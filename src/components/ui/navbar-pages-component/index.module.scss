@@ -1,0 +1,33 @@
+.navbar_container {
+  width: 100%;
+  max-width: 16.9375rem;
+  height: auto;
+  // background: rgba(49, 48, 48, 0.972);
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    .link {
+      border: none;
+      padding: 6px 8px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      color: #ccc;
+      font-weight: 500;
+      font-size: 1.0625rem;
+      &:hover {
+        &:hover {
+					transition: all 0.2s ease;
+					background-color: rgb(63, 59, 59);
+				}
+      }
+      &.active {
+        transition: all 0.2s ease;
+        color: #579DFF;
+        background-color: rgba(19, 82, 243, 0.13);
+      }
+    }
+  }
+}
