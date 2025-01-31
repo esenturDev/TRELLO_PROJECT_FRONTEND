@@ -32,7 +32,7 @@ const SignUpPage = () => {
 				setTimeout(() => {
 					showToast("success", res.message || "success");
 					router.push("/signIn");
-				}, 1500);
+				}, 300);
 			}
 			reset();
 		} catch (error) {
@@ -129,7 +129,9 @@ const SignUpPage = () => {
 								<button className={scss.button} type="submit">
 									{isLoading ? "Loading..." : "Зарегистрироваться"}
 								</button>
-								<Link className={scss.link} href={'/signIn'}>Login</Link>
+								<Link className={scss.link} href={"/signIn"}>
+									Login
+								</Link>
 							</div>
 						</div>
 					</form>

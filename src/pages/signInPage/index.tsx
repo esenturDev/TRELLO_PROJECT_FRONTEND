@@ -30,15 +30,17 @@ const SignInPage = () => {
 			const res = await postSignIn(data).unwrap();
 			if (res.status === 201 || res.token) {
 				setTimeout(() => {
-					Cookies.set("token", res.token);
-					router.push("/");
+					Cookies.set("token", res.token, {
+						expres: '24h',
+					});
+					router.push("/boards");
 					showToast(
 						"success",
 						res.message || "You have successfully signed in"
 					);
 				}, 300);
 			}
-      reset()
+			reset();
 		} catch (error) {
 			const err = error as TypesAuthorizationError;
 			console.error(error);
@@ -111,7 +113,9 @@ const SignInPage = () => {
 								<button className={scss.button} type="submit">
 									{isLoading ? "Loading..." : "Login"}
 								</button>
-                <Link className={scss.link} href={'/signUp'}>Зарегистрироваться</Link>
+								<Link className={scss.link} href={"/signUp"}>
+									Зарегистрироваться
+								</Link>
 							</div>
 						</div>
 					</form>
