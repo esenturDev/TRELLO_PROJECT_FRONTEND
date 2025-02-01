@@ -101,3 +101,32 @@
 		}
 	}
 }
+
+.modal_container {
+	width: 100%;
+	// max-width: 19rem;
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	.add_board_text{
+		color: black;
+		font-weight: 500;
+		font-size: 1.0625rem;
+	}
+	.colors_div {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+		.colors {
+			display: flex;
+			align-items: center;
+			flex-wrap: wrap;
+			gap: 5px;
+		}
+	}
+	.form_add_div {
+		display: flex;
+		flex-direction: column;
+		gap: 0px;
+	}
+}

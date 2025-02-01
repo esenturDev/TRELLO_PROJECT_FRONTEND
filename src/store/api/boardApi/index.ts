@@ -7,10 +7,10 @@ const api = index.injectEndpoints({
 			Boards.postBoardResponse,
 			Boards.postBoardRequest
 		>({
-			query: (data) => ({
+			query: ({ title, colorContainer }) => ({
 				url: "/boards",
 				method: "POST",
-				body: data,
+				body: { title, colorContainer },
 			}),
 			invalidatesTags: ["board"],
 		}),
@@ -21,7 +21,7 @@ const api = index.injectEndpoints({
 			query: () => ({
 				url: "/boards",
 				method: "GET",
-				headers: {					
+				headers: {
 					Authorization: `Bearer ${Cookies.get("token")}`,
 				},
 			}),
@@ -29,6 +29,5 @@ const api = index.injectEndpoints({
 		}),
 	}),
 });
-
 
 export const { usePostBoardApiMutation, useGetBoardsApiQuery } = api;
