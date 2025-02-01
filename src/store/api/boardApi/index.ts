@@ -1,4 +1,5 @@
 import { api as index } from "..";
+
 import Cookies from "js-cookie";
 const api = index.injectEndpoints({
 	endpoints: (build) => ({
@@ -20,7 +21,7 @@ const api = index.injectEndpoints({
 			query: () => ({
 				url: "/boards",
 				method: "GET",
-				headers: {
+				headers: {					
 					Authorization: `Bearer ${Cookies.get("token")}`,
 				},
 			}),
@@ -28,5 +29,6 @@ const api = index.injectEndpoints({
 		}),
 	}),
 });
+
 
 export const { usePostBoardApiMutation, useGetBoardsApiQuery } = api;

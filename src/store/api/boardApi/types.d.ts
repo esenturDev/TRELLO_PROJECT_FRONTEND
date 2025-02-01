@@ -11,7 +11,10 @@ namespace Boards {
 
   type getBoardsRequest = void;
   type getBoardsResponse = {
-    title: string;
-    userId?: string
-  }[];
+    boards: {
+
+      title: string;
+      userId?: string
+    }[]
+  };
 }
