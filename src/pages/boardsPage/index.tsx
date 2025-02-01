@@ -8,7 +8,6 @@ import {
 	usePostBoardApiMutation,
 } from "@/store/api/boardApi";
 import { IconUsers } from "@tabler/icons-react";
-import Cookies from "js-cookie";
 import { Button, Modal } from "antd";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ColorArray } from "./constant";
@@ -20,10 +19,9 @@ export const BoardsPage = () => {
 	const router = useRouter();
 	const [openModal, setOpenModal] = useState(false);
 	const [valueTitle, setValueTitle] = useState<string>("");
-	const { data, isLoading , refetch} = useGetBoardsApiQuery();
+	const { data, isLoading, refetch } = useGetBoardsApiQuery();
 	const [postBoardApi, { isLoading: isLoadingPost }] =
 		usePostBoardApiMutation();
-	console.log(Cookies.get("token"));
 	const updateSearchParams = (key: string, value: string | number) => {
 		const params = new URLSearchParams();
 		params.set(key, value.toString());
@@ -79,10 +77,12 @@ export const BoardsPage = () => {
 				title: valueTitle,
 			}).unwrap();
 			if (res.status === 201) {
-				// router.push("/");
-				showToast("success", res.message);
-				refetch()
-				setOpenModal(false)
+				setTimeout(() => {
+					router.push("/trello");
+					showToast("success", res.message);
+					refetch();
+					setOpenModal(false);
+				}, 300);
 			}
 		} catch (error) {
 			const err = error as TypesAuthorizationError;
@@ -102,7 +102,10 @@ export const BoardsPage = () => {
 								<div className={scss.boards_map}>
 									{/* <h3>Недавно просмотренное</h3> */}
 									{data?.boards.map((el, index) => (
-										<div key={index + 1} className={scss.card} style={{background: el.colorContainer}}>
+										<div
+											key={index + 1}
+											className={scss.card}
+											style={{ background: el.colorContainer }}>
 											<div className={scss.card_c}>
 												<p className={scss.board_name}>{el.title}</p>
 												<IconUsers width={16} height={16} />
@@ -119,7 +122,10 @@ export const BoardsPage = () => {
 								<div className={scss.add_and_boards}>
 									{data?.boards.length! > 0 &&
 										data?.boards.map((item, index) => (
-											<div key={index + 1} className={scss.card_board} style={{background: item.colorContainer}}>
+											<div
+												key={index + 1}
+												className={scss.card_board}
+												style={{ background: item.colorContainer }}>
 												<div className={scss.x}>
 													<p className={scss.board_name}>{item.title}</p>
 													<IconUsers width={16} height={16} />
@@ -175,7 +181,7 @@ export const BoardsPage = () => {
 					<Button
 						disabled={valueTitle.length === 0 ? true : false}
 						onClick={handleAddBoardFunk}>
-						{isLoadingPost ? 'Loading...' : 'Создать'}
+						{isLoadingPost ? "Loading..." : "Создать"}
 					</Button>
 					<span>
 						Используя изображения с сайта Unsplash, вы принимаете его Условия
