@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 import scss from "./index.module.scss";
 import {
@@ -8,7 +9,9 @@ import {
 } from "@tabler/icons-react";
 import CustomInput from "@/components/ui/input-component";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 export const Header = () => {
+	const router = useRouter();
 	return (
 		<header className={scss.header_container}>
 			<nav className={scss.navbar}>
@@ -19,7 +22,7 @@ export const Header = () => {
 						height={28}
 						cursor={"pointer"}
 					/>
-					<button>
+					<button onClick={() => router.push('/boards')}>
 						<IconBrandTrello
 							width={28}
 							height={28}

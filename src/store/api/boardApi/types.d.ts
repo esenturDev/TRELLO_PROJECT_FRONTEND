@@ -9,6 +9,7 @@ namespace Boards {
 		userId: string;
 		message: string;
 		status: number;
+		_id: string;
 	};
 
 	type getBoardsRequest = void;

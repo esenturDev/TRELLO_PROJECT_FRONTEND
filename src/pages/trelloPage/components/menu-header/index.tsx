@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import scss from "./index.module.scss";
 import {
@@ -13,12 +14,16 @@ import {
 	IconUserCircle,
 	IconUsers,
 } from "@tabler/icons-react";
+import { useParams } from "next/navigation";
+import { useGetByIdBoardQuery } from "@/store/api/boardApi";
 export const MenuHeader = () => {
+	const { id } = useParams();
+	const { data } = useGetByIdBoardQuery(id);
 	return (
 		<nav className={scss.menu_header_container}>
 			<div className={scss.content}>
 				<ul className={scss.ul}>
-					<h2>Trello</h2>
+					<h2>{data?.title}</h2>
 					<IconStar height={16} width={16} color="white" />
 					<li>
 						<IconUsers height={16} width={16} color="white" />

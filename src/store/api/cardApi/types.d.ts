@@ -15,9 +15,7 @@ namespace Cards {
     message: string;
   }
 
-  type getCardsRequest = {
-    listId: string;
-  }
+  type getCardsRequest = string;
   type getCardsResponse = {
     title: string;
     description: string;

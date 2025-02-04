@@ -13,6 +13,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { ColorArray } from "./constant";
 import CustomInput from "@/components/ui/input-component";
 import { showToast } from "@/components/ui/toastify";
+import Link from "next/link";
 
 export const BoardsPage = () => {
 	const searchParams = useSearchParams();
@@ -76,9 +77,9 @@ export const BoardsPage = () => {
 					].toString() || "#1D2125",
 				title: valueTitle,
 			}).unwrap();
-			if (res.status === 201) {
+			if (res.status === 201 || res.title) {
 				setTimeout(() => {
-					router.push("/trello");
+					router.push(`/trello/${res._id}`);
 					showToast("success", res.message);
 					refetch();
 					setOpenModal(false);
@@ -102,8 +103,8 @@ export const BoardsPage = () => {
 								<div className={scss.boards_map}>
 									{/* <h3>Недавно просмотренное</h3> */}
 									{data?.boards.map((el, index) => (
-										<div
-											onClick={() => router.push("/trello")}
+										<Link
+											href={`/trello/${el._id}`}
 											key={index + 1}
 											className={scss.card}
 											style={{ background: el.colorContainer }}>
@@ -111,7 +112,7 @@ export const BoardsPage = () => {
 												<p className={scss.board_name}>{el.title}</p>
 												<IconUsers width={16} height={16} />
 											</div>
-										</div>
+										</Link>
 									))}
 								</div>
 							)}
@@ -123,7 +124,8 @@ export const BoardsPage = () => {
 								<div className={scss.add_and_boards}>
 									{data?.boards.length! > 0 &&
 										data?.boards.map((item, index) => (
-											<div
+											<Link
+												href={`/trello/${item._id}`}
 												key={index + 1}
 												className={scss.card_board}
 												style={{ background: item.colorContainer }}>
@@ -131,7 +133,7 @@ export const BoardsPage = () => {
 													<p className={scss.board_name}>{item.title}</p>
 													<IconUsers width={16} height={16} />
 												</div>
-											</div>
+											</Link>
 										))}
 									<button onClick={openModalFunk}>Создать доску</button>
 								</div>
