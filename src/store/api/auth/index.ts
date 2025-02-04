@@ -1,5 +1,5 @@
 import { api as index } from "..";
-
+import Cookies from "js-cookie";
 const api = index.injectEndpoints({
 	endpoints: (build) => ({
 		postSignUp: build.mutation<AUTH.PostSignUpResponse, AUTH.PostSignUpRequest>(
@@ -22,7 +22,21 @@ const api = index.injectEndpoints({
 				invalidatesTags: ["auth"],
 			}
 		),
+		getMeUserApi: build.query<AUTH.GetMeResponse, AUTH.GetMeRequest>({
+			query: () => ({
+				url: "/auth/signUp/me",
+				method: "GET",
+				headers: {
+					Authorization: `Bearer ${Cookies.get("token")}`,
+				},
+			}),
+			providesTags: ["auth"],
+		}),
 	}),
 });
 
-export const { usePostSignUpMutation, usePostSignInMutation } = api;
+export const {
+	usePostSignUpMutation,
+	usePostSignInMutation,
+	useGetMeUserApiQuery,
+} = api;

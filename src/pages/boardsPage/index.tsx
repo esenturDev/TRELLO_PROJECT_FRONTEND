@@ -103,6 +103,7 @@ export const BoardsPage = () => {
 									{/* <h3>Недавно просмотренное</h3> */}
 									{data?.boards.map((el, index) => (
 										<div
+											onClick={() => router.push("/trello")}
 											key={index + 1}
 											className={scss.card}
 											style={{ background: el.colorContainer }}>

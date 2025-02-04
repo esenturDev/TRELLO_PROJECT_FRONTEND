@@ -27,7 +27,24 @@ const api = index.injectEndpoints({
 			}),
 			providesTags: ["board"],
 		}),
+		getByIdBoard: build.query<
+			Boards.getByIdBoardResponse,
+			Boards.getByIdBoardRequest
+		>({
+			query: (id) => ({
+				url: `/boards/${id}`,
+				method: "GET",
+				headers: {
+					Authorization: `Bearer ${Cookies.get("token")}`,
+				},
+			}),
+			providesTags: ["board"],
+		}),
 	}),
 });
 
-export const { usePostBoardApiMutation, useGetBoardsApiQuery } = api;
+export const {
+	usePostBoardApiMutation,
+	useGetBoardsApiQuery,
+	useGetByIdBoardQuery,
+} = api;

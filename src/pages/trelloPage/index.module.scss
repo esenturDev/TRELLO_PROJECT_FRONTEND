@@ -1,0 +1,13 @@
+.trello_container {
+  width: 100%;
+  height: 100vh;
+  .content {
+    display: flex;
+    .trello_content{
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+
+    }
+  }
+}
