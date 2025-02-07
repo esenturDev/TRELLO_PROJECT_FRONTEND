@@ -38,9 +38,9 @@ export const CustomTextArea: FC<CustomTextAreaProps> = ({
   }`;
   return (
     <div className={containerClassName}>
-      <label className={scss.customTextareaLabel}>
+      {/* <label className={scss.customTextareaLabel}>
         {isFocused ? 'Typing' : error ? 'Error' : 'Label'}
-      </label>
+      </label> */}
       <TextArea
         value={value}
         placeholder={placeholder}

@@ -3,10 +3,10 @@ import Cookies from "js-cookie";
 const api = index.injectEndpoints({
 	endpoints: (build) => ({
 		postListApi: build.mutation<Lists.postListResponse, Lists.postListRequest>({
-			query: (data) => ({
+			query: ({ boardId, title }) => ({
 				url: "/lists",
 				method: "POST",
-				body: data,
+				body: { boardId, title },
 				headers: {
 					Authorization: `Bearer ${Cookies.get("token")}`,
 				},
@@ -14,8 +14,8 @@ const api = index.injectEndpoints({
 			invalidatesTags: ["list"],
 		}),
 		getListsApi: build.query<Lists.getListsResponse, Lists.getListsRequest>({
-			query: () => ({
-				url: "/lists",
+			query: ({ boardId }) => ({
+				url: `/lists?boardId=${boardId}`,
 				method: "GET",
 				headers: {
 					Authorization: `Bearer ${Cookies.get("token")}`,

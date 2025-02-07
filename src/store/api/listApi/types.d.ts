@@ -11,9 +11,12 @@ namespace Lists {
     userId?: string
   }
 
-  type getListsRequest = void;
+  type getListsRequest = {
+    boardId: string;
+  };
   type getListsResponse = {
     title: string;
     boardId?: string;
+    _id: string;
   }[];
 }
